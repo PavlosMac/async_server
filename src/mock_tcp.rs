@@ -1,10 +1,9 @@
-
+use super::*;
 use futures::io::Error;
 use futures::task::{Context, Poll};
 use std::cmp::min;
 use std::marker::Unpin;
 use std::pin::Pin;
-use super::*;
 pub struct MockTcpStream {
     pub read_data: Vec<u8>,
     pub write_data: Vec<u8>,
@@ -28,7 +27,6 @@ impl Write for MockTcpStream {
         _: &mut Context,
         buf: &[u8],
     ) -> Poll<Result<usize, Error>> {
-        println!("{}hmmmmm",);
         self.write_data = Vec::from(buf);
 
         Poll::Ready(Ok(buf.len()))
